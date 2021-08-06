@@ -103,7 +103,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'httsp://api.mesto-mkdirdev.nomoredomains.club',
+  url: 'https://api.mesto-mkdirdev.nomoredomains.club',
   headers: {
     authorization: localStorage.getItem('jwt'),
     'content-Type': 'application/json'
