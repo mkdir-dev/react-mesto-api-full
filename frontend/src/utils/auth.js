@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co'
+export const BASE_URL = 'httsp://api.mesto-mkdirdev.nomoredomains.club'
 
 function fixRes(res) {
   return res.ok ? res.json() : Promise.reject(`Произошла ошибка: ${res.status}`)

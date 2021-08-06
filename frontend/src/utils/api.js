@@ -103,9 +103,9 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-23',
+  url: 'httsp://api.mesto-mkdirdev.nomoredomains.club',
   headers: {
-    authorization: '08704321-7bb1-4c78-b9e1-013c8abb4d8e',
+    // authorization: '08704321-7bb1-4c78-b9e1-013c8abb4d8e',
     'content-Type': 'application/json'
   }
 })
