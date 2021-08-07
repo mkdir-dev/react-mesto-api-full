@@ -37,8 +37,6 @@ app.use(requestCors);
 
 const { NODE_ENV, PROD_DB } = process.env;
 const DEV_DB = 'mongodb://localhost:27017/mestodb';
-console.log(NODE_ENV);
-console.log(PROD_DB);
 
 mongoose.connect(NODE_ENV === 'production' ? PROD_DB : DEV_DB, {
   useUnifiedTopology: true,

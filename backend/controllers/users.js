@@ -63,8 +63,6 @@ module.exports.createUser = (req, res, next) => {
         },
       }))
       .catch((err) => {
-        console.log(err); // поиск err
-
         if (err.name === 'ValidationError') {
           throw new BadRequestError('Ошибка валидации при создании пользователя');
         } else if (err.name === 'CastError') {
