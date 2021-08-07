@@ -181,7 +181,7 @@ function App() {
     localStorage.removeItem('token')
     setLoggedIn(false)
     setUserEmail('')
-    history.push('/sihn-in')
+    history.push('/sign-in')
   }
 
   return (

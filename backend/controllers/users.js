@@ -63,13 +63,15 @@ module.exports.createUser = (req, res, next) => {
         },
       }))
       .catch((err) => {
+        console.log(err); // поиск err
+
         if (err.name === 'ValidationError') {
           throw new BadRequestError('Ошибка валидации при создании пользователя');
         } else if (err.name === 'CastError') {
           throw new BadRequestError('Переданы некорректные данные при создании пользователя');
         }
         if (err.name === 'MongoError' && err.code === 11000) {
-          throw new ConflictError('Пользователь с таким Email уже зарегистрирован'); // !!!
+          throw new ConflictError('Пользователь с таким Email уже зарегистрирован');
         }
         throw new InternalServerError('Ошибка сервера. Ошибка по-умолчанию');
       }))
