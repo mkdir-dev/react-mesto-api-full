@@ -35,7 +35,10 @@ const app = express();
 app.use(cors());
 app.use(requestCors);
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+const { NODE_ENV, PROD_DB } = process.env;
+const DEV_DB = 'mongodb://localhost:27017/mestodb';
+
+mongoose.connect(NODE_ENV === 'production' ? PROD_DB : DEV_DB, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
