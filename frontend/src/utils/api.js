@@ -100,12 +100,19 @@ class Api {
       return this.addLikeCard(id)
     }
   }
+
+  refreshHead() {
+    this._headers = {
+      authorization: `${localStorage.getItem('jwt')}`,
+      'content-Type': 'application/json'
+    }
+  }
 }
 
 const api = new Api({
   url: 'https://api.mesto-mkdirdev.nomoredomains.club',
   headers: {
-    authorization: localStorage.getItem('jwt'),
+    authorization: `${localStorage.getItem('jwt')}`,
     'content-Type': 'application/json'
   }
 })

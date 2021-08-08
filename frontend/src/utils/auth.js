@@ -1,3 +1,5 @@
+import api from "./api"
+
 export const BASE_URL = 'https://api.mesto-mkdirdev.nomoredomains.club'
 
 function fixRes(res) {
@@ -30,6 +32,15 @@ export function authorization(email, password) {
       password, email
     })
   })
+    .then(res => {
+      console.log(res)
+      if (res.token) {
+        localStorage.setItem('jwt', res.token)
+        api.refreshHead()
+
+        return res.token
+      }
+    })
     .then(res => fixRes(res))
 }
 
@@ -37,9 +48,10 @@ export function getToken(token) {
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
-      "Authorization": `Bearer ${token}`
+      "Authorization": `${token}`
     },
     method: 'GET',
   })
+    .then(res => res.json())
     .then(res => fixRes(res))
 }
