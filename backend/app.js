@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-// const cors = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
@@ -21,7 +21,7 @@ const NotFoundError = require('./errors/NotFoundError');
 // eslint-disable-next-line import/order
 const { errors } = require('celebrate');
 
-// const { requestCors } = require('./middlewares/cors');
+const { requestCors } = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const limiter = rateLimit({
@@ -32,16 +32,9 @@ const limiter = rateLimit({
 const { PORT = 3000 } = process.env;
 const app = express();
 
-// app.use(cors());
-// app.use(requestCors);
-/*
-const { NODE_ENV, PROD_DB } = process.env;
-const DEV_DB = 'mongodb://localhost:27017/mestodb';
-console.log(NODE_ENV);
-console.log(PROD_DB);
-*/
+app.use(cors());
+app.use(requestCors);
 
-// NODE_ENV === 'production' ? PROD_DB : DEV_DB,
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
   useNewUrlParser: true,

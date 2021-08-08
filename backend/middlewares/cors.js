@@ -1,6 +1,8 @@
 const allowedCors = [
   'https://mesto-mkdirdev.nomoredomains.club',
   'http://mesto-mkdirdev.nomoredomains.club',
+  'https://api.mesto-mkdirdev.nomoredomains.club',
+  'http://api.mesto-mkdirdev.nomoredomains.club',
   'localhost:3000',
 ];
 
