@@ -32,7 +32,9 @@ function App() {
 
   React.useEffect(() => {
     checkToken()
-  }, [loggedIn])
+  }, [checkToken, loggedIn])
+
+  /*
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -40,8 +42,12 @@ function App() {
     }
   }, [loggedIn, history])
 
+  */
+
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    const token = localStorage.getItem('token')
+
+    loggedIn && Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
       .then(([userData, cardsData]) => {
         setCurrentUser(userData)
         setCards(cardsData)
@@ -49,7 +55,7 @@ function App() {
       .catch(err => {
         console.log(`Данные с сервера не получены. Ошибка: ${err}.`)
       })
-  }, [])
+  }, [loggedIn, userEmail])
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
@@ -135,7 +141,9 @@ function App() {
   function handleRegister(email, password) {
     return auth.register(email, password)
       .then(res => {
-        localStorage.setItem('token', res.token)
+        const token = res._id
+        token && localStorage.setItem('token', token)
+        setUserEmail(res.email)
         setIsInfoTooltipPopupOpen(true)
         history.push('/sign-in')
       })
@@ -151,8 +159,10 @@ function App() {
   function handleLogin(email, password) {
     return auth.authorization(email, password)
       .then(res => {
-        localStorage.setItem('token', res.token)
+        const token = res.token
+        token && localStorage.setItem('token', token)
         setLoggedIn(true)
+        setUserEmail(res.email)
         history.push('/')
       })
       .catch(err => {
@@ -165,8 +175,7 @@ function App() {
     if (token) {
       auth.getToken(token)
         .then(res => {
-          setUserEmail(res.data.email)
-          // setUserEmail(res.email)
+          setUserEmail(res.email)
           setLoggedIn(true)
         })
         .catch(err => {

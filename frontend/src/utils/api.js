@@ -14,19 +14,22 @@ class Api {
   }
 
   // получить данные пользователя с сервера
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
     })
       .then(res => this._fixPromise(res))
   }
 
   // получить данные карточек
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._url}/cards`, {
-      method: 'GET',
-      headers: this._headers
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     })
       .then(res => this._fixPromise(res))
   }
@@ -100,20 +103,13 @@ class Api {
       return this.addLikeCard(id)
     }
   }
-
-  refreshHead() {
-    this._headers = {
-      authorization: `${localStorage.getItem('jwt')}`,
-      'content-Type': 'application/json'
-    }
-  }
 }
 
 const api = new Api({
   url: 'https://api.mesto-mkdirdev.nomoredomains.club',
   headers: {
     authorization: `${localStorage.getItem('jwt')}`,
-    'content-Type': 'application/json'
+    'Content-Type': 'application/json'
   }
 })
 
