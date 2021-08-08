@@ -33,6 +33,8 @@ export function authorization(email, password) {
 }
 
 export function getToken(token) {
+  console.log('getToken в utils/auth: ' + token)
+
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',

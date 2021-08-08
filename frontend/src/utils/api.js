@@ -15,6 +15,8 @@ class Api {
 
   // получить данные пользователя с сервера
   getUserInfo(token) {
+    console.log('getUserInfo в utils/api: ' + token)
+
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
