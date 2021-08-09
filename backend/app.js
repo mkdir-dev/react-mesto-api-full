@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
 const { login, createUser } = require('./controllers/users');
@@ -46,7 +46,7 @@ app.use(limiter);
 
 app.use('/', express.json());
 app.use(helmet());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(requestLogger);
 
 app.post('/signin', signinValidation, login);

@@ -14,24 +14,19 @@ class Api {
   }
 
   // получить данные пользователя с сервера
-  getUserInfo(token) {
-    console.log('getUserInfo в utils/api: ' + token)
-
+  getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      headers: {
-        authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers
     })
       .then(res => this._fixPromise(res))
   }
 
   // получить данные карточек
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      method: 'GET',
+      headers: this._headers
     })
       .then(res => this._fixPromise(res))
   }
@@ -109,10 +104,6 @@ class Api {
 
 const api = new Api({
   url: 'https://api.mesto-mkdirdev.nomoredomains.club',
-  headers: {
-    authorization: `${localStorage.getItem('jwt')}`,
-    'Content-Type': 'application/json'
-  }
 })
 
 export default api

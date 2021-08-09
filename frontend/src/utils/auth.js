@@ -4,6 +4,7 @@ function fixRes(res) {
   return res.ok ? res.json() : Promise.reject(`Произошла ошибка: ${res.status}`)
 }
 
+
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     headers: {
@@ -21,8 +22,9 @@ export function register(email, password) {
 export function authorization(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      // 'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -33,12 +35,10 @@ export function authorization(email, password) {
 }
 
 export function getToken(token) {
-  console.log('getToken в utils/auth: ' + token)
-
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     },
     method: 'GET',
   })

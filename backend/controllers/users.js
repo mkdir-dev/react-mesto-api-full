@@ -125,6 +125,25 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
+      // создадим токен
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' },
+      );
+
+      // вернём токен
+      return res.send({ token });
+    })
+    .catch(() => {
+      throw new UnauthorizedError('Ошибка аутентификации');
+    })
+    .catch(next);
+};
+
+/*
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
@@ -141,7 +160,7 @@ module.exports.login = (req, res, next) => {
       throw new UnauthorizedError('Ошибка аутентификации');
     })
     .catch(next);
-};
+*/
 
 module.exports.getCurrentUserInfo = (req, res, next) => {
   User.findById(res.user._id)
