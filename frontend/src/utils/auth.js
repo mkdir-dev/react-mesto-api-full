@@ -8,7 +8,7 @@ function fixRes(res) {
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     headers: {
-      'Accept': 'application/json',
+      // 'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     method: 'POST',
@@ -24,7 +24,7 @@ export function authorization(email, password) {
     headers: {
       // 'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      // 'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -38,7 +38,8 @@ export function getToken(token) {
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      //'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     method: 'GET',
   })

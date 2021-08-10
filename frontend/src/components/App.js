@@ -142,7 +142,7 @@ function App() {
 
   function checkToken() {
     const token = localStorage.getItem('token')
-    // console.log(token)
+    // console.log('checkToken: ' + token)
 
     if (token) {
       auth.getToken(token)
@@ -163,7 +163,7 @@ function App() {
     localStorage.removeItem('token')
     setLoggedIn(false)
     setUserEmail('')
-    history.push('/sihn-in')
+    history.push('/sign-in')
   }
 
   // +++
