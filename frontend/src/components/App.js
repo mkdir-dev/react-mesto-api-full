@@ -184,8 +184,9 @@ function App() {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
+
           setCurrentUser(userData)
-          setCards(cardsData)
+          setCards(cardsData.data)
         })
         .catch(err => {
           console.log(`Данные с сервера не получены. Ошибка: ${err}.`)

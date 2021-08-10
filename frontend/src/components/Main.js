@@ -3,7 +3,14 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import Card from './Card'
 
 function Main(props) {
+  const { name, about, avatar } = React.useContext(CurrentUserContext);
+
   const currentUser = React.useContext(CurrentUserContext)
+
+  console.log(currentUser)
+  console.log(name)
+  console.log(about)
+  console.log(avatar)
 
   return (
     <main className="content page__section">
@@ -14,11 +21,11 @@ function Main(props) {
             type="button"
             aria-label="Редактировать"
             onClick={props.onPopupAvatar}>
-            <div className="user__avatar" style={{ backgroundImage: `url(${currentUser.avatar})` }}></div>
+            <div className="user__avatar" style={{ backgroundImage: `url(${avatar})` }}></div>
           </button>
           <div className="user__info">
             <div className="user__text">
-              <h1 className="user__name">{currentUser.name}</h1>
+              <h1 className="user__name">{name}</h1>
               <button
                 className="button user__edit"
                 type="button"
@@ -26,7 +33,7 @@ function Main(props) {
                 onClick={props.onPopupEdit}>
               </button>
             </div>
-            <p className="user__about">{currentUser.about}</p>
+            <p className="user__about">{about}</p>
           </div>
         </div>
         <button
