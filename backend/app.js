@@ -71,6 +71,10 @@ app.use((err, req, res, next) => {
       ? 'На сервере произошла ошибка'
       : message,
   });
+
+  // eslint-disable-next-line no-console
+  console.log(err);
+
   next();
 });
 
