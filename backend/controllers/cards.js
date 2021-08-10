@@ -24,6 +24,12 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
+  // eslint-disable-next-line no-console
+  console.log(req);
+
+  // eslint-disable-next-line no-console
+  console.log(res);
+
   Card.create({
     name,
     link,
@@ -31,6 +37,8 @@ module.exports.createCard = (req, res, next) => {
   })
     .then((card) => res.status(SUCCESS_OK).send({ data: card }))
     .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Ошибка валидации при создании карточки');
       } else if (err.name === 'CastError') {
