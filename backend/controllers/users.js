@@ -168,6 +168,7 @@ module.exports.getCurrentUserInfo = (req, res, next) => {
       res.status(SUCCESS_OK).send({ userInfo });
     })
     .catch((err) => {
+      // eslint-disable-next-line no-console
       console.log(err);
 
       next(err);
