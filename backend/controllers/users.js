@@ -167,5 +167,9 @@ module.exports.getCurrentUserInfo = (req, res, next) => {
     .then((userInfo) => {
       res.status(SUCCESS_OK).send({ userInfo });
     })
-    .catch(next);
+    .catch((err) => {
+      console.log(err);
+
+      next(err);
+    });
 };
