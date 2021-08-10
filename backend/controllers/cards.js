@@ -25,10 +25,10 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   // eslint-disable-next-line no-console
-  console.log(req);
+  console.log(name);
 
   // eslint-disable-next-line no-console
-  console.log(res);
+  console.log(link);
 
   Card.create({
     name,
