@@ -163,14 +163,9 @@ module.exports.login = (req, res, next) => {
 */
 
 module.exports.getCurrentUserInfo = (req, res, next) => {
-  User.findById(res.user._id) // ???
+  User.findById(req.user._id)
     .then((userInfo) => {
       res.status(SUCCESS_OK).send({ userInfo });
     })
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-
-      next(err);
-    });
+    .catch(next);
 };
