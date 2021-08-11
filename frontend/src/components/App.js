@@ -81,6 +81,7 @@ function App() {
   function handleUpdateUser(data) {
     api.editUserInfo(data)
       .then(userData => {
+        console.dir(userData)
         setCurrentUser(userData)
         closeAllPopups()
       })
