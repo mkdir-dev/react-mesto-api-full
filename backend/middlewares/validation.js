@@ -38,9 +38,9 @@ module.exports.userInfoValidation = celebrate({
 
 module.exports.userAvatarValidation = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().custom((value, url) => {
+    avatar: Joi.string().required().custom((value) => { // был (value, url)
       if (validator.isURL(value, { require_protocol: true })) {
-        return url;
+        return value; // был url
       }
       return value.message('Неверный URL-адрес');
     }),
