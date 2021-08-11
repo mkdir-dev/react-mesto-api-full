@@ -104,8 +104,12 @@ class Api {
       .then(res => this._fixPromise(res))
   }
 
+
+  // api
   addLikeCard(id) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+    console.log('addLikeCard - ' + id);
+    
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       // headers: this._headers
       headers: {
@@ -117,7 +121,9 @@ class Api {
   }
 
   deleteLikeCard(id) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+    console.log('deleteLikeCard - ' + id);
+
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       // headers: this._headers
       headers: {

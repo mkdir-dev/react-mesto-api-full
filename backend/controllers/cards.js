@@ -80,6 +80,9 @@ module.exports.deleteCard = (req, res, next) => {
 module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
 
+  // eslint-disable-next-line no-console
+  console.log(cardId);
+
   Card.findByIdAndUpdate(
     cardId,
     { $addToSet: { likes: req.user._id } },
@@ -101,6 +104,9 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
+
+  // eslint-disable-next-line no-console
+  console.log(cardId);
 
   Card.findByIdAndUpdate(
     cardId,

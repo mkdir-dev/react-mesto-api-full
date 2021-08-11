@@ -54,8 +54,11 @@ function App() {
     setSelectedCard(null)
   }
 
+  // App
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id)
+
+    console.dir(card) // +++
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then(newCard => {
@@ -63,6 +66,7 @@ function App() {
         setCards(newCards)
       })
       .catch(err => {
+        console.log(err)
         console.log(`Не удалось обработать отметку "Мне нравится". Ошибка: ${err}.`)
       })
   }
