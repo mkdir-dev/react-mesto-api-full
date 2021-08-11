@@ -81,7 +81,6 @@ function App() {
   function handleUpdateUser(data) {
     api.editUserInfo(data)
       .then(userData => {
-        console.dir(userData)
         setCurrentUser(userData)
         closeAllPopups()
       })
@@ -93,7 +92,6 @@ function App() {
   function handleUpdateAvatar(data) {
     api.editUserAvatar(data)
       .then(avatar => {
-        console.dir(avatar)
         setCurrentUser(avatar)
         closeAllPopups()
       })
@@ -144,8 +142,6 @@ function App() {
 
   function checkToken() {
     const token = localStorage.getItem('token')
-    // console.log('checkToken: ' + token)
-
     if (token) {
       auth.getToken(token)
         .then(res => {
@@ -168,25 +164,14 @@ function App() {
     history.push('/sign-in')
   }
 
-  // +++
   React.useEffect(() => {
     checkToken()
   }, [])
 
-  /*
-    React.useEffect(() => {
-      if (loggedIn) {
-        history.push('/')
-      }
-    }, [loggedIn, history])
-  */
-
-  // +++
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
-
           setCurrentUser(userData.userInfo)
           setCards(cardsData.data)
         })

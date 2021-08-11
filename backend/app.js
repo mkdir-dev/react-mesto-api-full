@@ -72,9 +72,6 @@ app.use((err, req, res, next) => {
       : message,
   });
 
-  // eslint-disable-next-line no-console
-  console.log(err);
-
   next();
 });
 
