@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
+
   let payload;
 
   try {
@@ -23,7 +24,7 @@ module.exports = (req, res, next) => {
     throw new UnauthorizedError('Необходима авторизация');
   }
 
-  req.user = payload;
+  req.user._id = payload._id;
 
   next();
 };

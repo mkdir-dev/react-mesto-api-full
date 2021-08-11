@@ -90,7 +90,7 @@ class Api {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
+      }
     })
       .then(res => this._fixPromise(res))
   }

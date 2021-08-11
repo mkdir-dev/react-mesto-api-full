@@ -8,7 +8,6 @@ function fixRes(res) {
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     headers: {
-      // 'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     method: 'POST',
@@ -22,9 +21,7 @@ export function register(email, password) {
 export function authorization(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     headers: {
-      // 'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -35,10 +32,12 @@ export function authorization(email, password) {
 }
 
 export function getToken(token) {
+
+  console.log("getToken: " + token)
+
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
-      //'Authorization': `Bearer ${token}`,
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     method: 'GET',

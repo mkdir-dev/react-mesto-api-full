@@ -43,33 +43,39 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  const { userId } = req.user;
-  /*
-    Card.findById(cardId)
-      .orFail(new Error('NotFound'))
-      .then((card) => {
-        if (card.owner._id.toString() === userId) {
-          Card.findByIdAndRemove(cardId)
-            .then(() => res.status(SUCCESS_OK).send({
-              message: 'Удаление карточки прошло успешно',
-            }));
-        } else {
-          throw new ForbiddenError('Вы не можете удалять чужие карточки');
-        }
-      })
-      */
+  const userId = req.user._id;
+
   Card.findById(cardId)
     .orFail(new Error('NotFound'))
     .then((card) => {
-      if (card.owner.toString() !== userId) {
-        throw new ForbiddenError('Вы не можете удалять чужие карточки');
-      } else {
+      if (card.owner.toString() === userId) {
         Card.findByIdAndRemove(cardId)
-          .then(() => res.status(SUCCESS_OK).send(card))
-          .catch(next);
+          .then(() => res.status(SUCCESS_OK).send({
+            message: 'Удаление карточки прошло успешно',
+          }));
+      } else {
+        throw new ForbiddenError('Вы не можете удалять чужие карточки');
       }
     })
+    /*
+    Card.findById(cardId)
+      .orFail(new Error('NotFound'))
+      .then((card) => {
+        if (card.owner.toString() !== userId) {
+          throw new ForbiddenError('Вы не можете удалять чужие карточки');
+        } else {
+          Card.findByIdAndRemove(cardId)
+            .then(() => res.status(SUCCESS_OK).send(card))
+            .catch(next);
+        }
+      })
+      */
     .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Поймана ошибка в блоке catch');
+      // eslint-disable-next-line no-console
+      console.dir(err);
+
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные при удалении карточки');
       }
