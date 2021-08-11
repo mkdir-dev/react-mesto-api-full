@@ -81,7 +81,7 @@ module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
 
   // eslint-disable-next-line no-console
-  console.log(cardId);
+  // console.log(cardId);
 
   Card.findByIdAndUpdate(
     cardId,
@@ -89,7 +89,7 @@ module.exports.likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotFound'))
-    .then((card) => res.status(SUCCESS_OK).send({ data: card }))
+    .then((card) => res.status(SUCCESS_OK).send(card)) // { data: card }
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные отметки "Мне нравится"');
@@ -106,7 +106,7 @@ module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
 
   // eslint-disable-next-line no-console
-  console.log(cardId);
+  // console.log(cardId);
 
   Card.findByIdAndUpdate(
     cardId,
@@ -114,7 +114,7 @@ module.exports.dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotFound'))
-    .then((card) => res.status(SUCCESS_OK).send({ data: card }))
+    .then((card) => res.status(SUCCESS_OK).send(card)) // { data: card }
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные отметки "Мне нравится"');
