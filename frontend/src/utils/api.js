@@ -17,7 +17,6 @@ class Api {
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      // headers: this._headers
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -30,7 +29,6 @@ class Api {
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
-      // headers: this._headers
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -43,7 +41,6 @@ class Api {
   editUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      // headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -60,7 +57,6 @@ class Api {
   editUserAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      // headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -74,12 +70,8 @@ class Api {
 
   // добавить карточку
   addCard(data) {
-
-    console.log(data);
-
     return fetch(`${this._url}/cards`, {
       method: 'POST',
-      // headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -95,7 +87,6 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
-      // headers: this._headers
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -105,13 +96,9 @@ class Api {
   }
 
 
-  // api
   addLikeCard(id) {
-    console.log('addLikeCard - ' + id);
-    
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
-      // headers: this._headers
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -121,11 +108,8 @@ class Api {
   }
 
   deleteLikeCard(id) {
-    console.log('deleteLikeCard - ' + id);
-
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
-      // headers: this._headers
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -145,12 +129,6 @@ class Api {
 
 const api = new Api({
   url: 'https://api.mesto-mkdirdev.nomoredomains.club',
-  /*
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}`, // я не могу фиксировать так токен, поэтому убираем headers
-  }
-  */
 })
 
 export default api

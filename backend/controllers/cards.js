@@ -24,12 +24,6 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
-  // eslint-disable-next-line no-console
-  console.log(name);
-
-  // eslint-disable-next-line no-console
-  console.log(link);
-
   Card.create({
     name,
     link,
@@ -37,8 +31,6 @@ module.exports.createCard = (req, res, next) => {
   })
     .then((card) => res.status(SUCCESS_OK).send({ data: card }))
     .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Ошибка валидации при создании карточки');
       } else if (err.name === 'CastError') {
@@ -80,16 +72,13 @@ module.exports.deleteCard = (req, res, next) => {
 module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  // eslint-disable-next-line no-console
-  // console.log(cardId);
-
   Card.findByIdAndUpdate(
     cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
     .orFail(new Error('NotFound'))
-    .then((card) => res.status(SUCCESS_OK).send(card)) // { data: card }
+    .then((card) => res.status(SUCCESS_OK).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные отметки "Мне нравится"');
@@ -105,16 +94,13 @@ module.exports.likeCard = (req, res, next) => {
 module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  // eslint-disable-next-line no-console
-  // console.log(cardId);
-
   Card.findByIdAndUpdate(
     cardId,
     { $pull: { likes: req.user._id } },
     { new: true },
   )
     .orFail(new Error('NotFound'))
-    .then((card) => res.status(SUCCESS_OK).send(card)) // { data: card }
+    .then((card) => res.status(SUCCESS_OK).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные отметки "Мне нравится"');
