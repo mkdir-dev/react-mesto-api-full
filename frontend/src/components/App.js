@@ -93,6 +93,7 @@ function App() {
   function handleUpdateAvatar(data) {
     api.editUserAvatar(data)
       .then(avatar => {
+        console.dir(avatar)
         setCurrentUser(avatar)
         closeAllPopups()
       })
