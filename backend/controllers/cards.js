@@ -48,11 +48,14 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(cardId)
     .orFail(new Error('NotFound'))
     .then((card) => {
-      if (card.owner._id.toString() === userId) {
+      if (card.owner.toString() === userId) {
         Card.findByIdAndRemove(cardId)
-          .then(() => res.status(SUCCESS_OK).send({
-            message: 'Удаление карточки прошло успешно',
-          }));
+          .then(() => res.status(SUCCESS_OK).send({ card }));
+        /*
+        .then(() => res.status(SUCCESS_OK).send({
+          message: 'Удаление карточки прошло успешно',
+        }));
+        */
       } else {
         throw new ForbiddenError('Вы не можете удалять чужие карточки');
       }
