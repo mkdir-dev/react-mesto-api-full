@@ -103,7 +103,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addCard(data)
       .then(newCard => {
-        setCards([newCard, ...cards])
+        setCards([newCard.data, ...cards])
         closeAllPopups()
       })
       .catch(err => {
