@@ -44,17 +44,29 @@ module.exports.createCard = (req, res, next) => {
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   const { userId } = req.user;
-
+  /*
+    Card.findById(cardId)
+      .orFail(new Error('NotFound'))
+      .then((card) => {
+        if (card.owner._id.toString() === userId) {
+          Card.findByIdAndRemove(cardId)
+            .then(() => res.status(SUCCESS_OK).send({
+              message: 'Удаление карточки прошло успешно',
+            }));
+        } else {
+          throw new ForbiddenError('Вы не можете удалять чужие карточки');
+        }
+      })
+      */
   Card.findById(cardId)
     .orFail(new Error('NotFound'))
     .then((card) => {
-      if (card.owner._id.toString() === userId) {
-        Card.findByIdAndRemove(cardId)
-          .then(() => res.status(SUCCESS_OK).send({
-            message: 'Удаление карточки прошло успешно',
-          }));
-      } else {
+      if (card.owner.toString() !== userId) {
         throw new ForbiddenError('Вы не можете удалять чужие карточки');
+      } else {
+        Card.findByIdAndRemove(cardId)
+          .then(() => res.status(SUCCESS_OK).send(card))
+          .catch(next);
       }
     })
     .catch((err) => {
