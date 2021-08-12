@@ -57,25 +57,7 @@ module.exports.deleteCard = (req, res, next) => {
         throw new ForbiddenError('Вы не можете удалять чужие карточки');
       }
     })
-    /*
-    Card.findById(cardId)
-      .orFail(new Error('NotFound'))
-      .then((card) => {
-        if (card.owner.toString() !== userId) {
-          throw new ForbiddenError('Вы не можете удалять чужие карточки');
-        } else {
-          Card.findByIdAndRemove(cardId)
-            .then(() => res.status(SUCCESS_OK).send(card))
-            .catch(next);
-        }
-      })
-      */
     .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log('Поймана ошибка в блоке catch');
-      // eslint-disable-next-line no-console
-      console.dir(err);
-
       if (err.name === 'CastError') {
         throw new BadRequestError('Переданы некорректные данные при удалении карточки');
       }
@@ -130,3 +112,17 @@ module.exports.dislikeCard = (req, res, next) => {
     })
     .catch(next);
 };
+
+/*
+    Card.findById(cardId)
+      .orFail(new Error('NotFound'))
+      .then((card) => {
+        if (card.owner.toString() !== userId) {
+          throw new ForbiddenError('Вы не можете удалять чужие карточки');
+        } else {
+          Card.findByIdAndRemove(cardId)
+            .then(() => res.status(SUCCESS_OK).send(card))
+            .catch(next);
+        }
+      })
+      */
