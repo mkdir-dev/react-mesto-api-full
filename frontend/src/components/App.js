@@ -145,7 +145,7 @@ function App() {
     if (token) {
       auth.getToken(token)
         .then(res => {
-          setUserEmail(res.data.email)
+          setUserEmail(res.userInfo.email)
           setLoggedIn(true)
         })
         .catch(err => {
