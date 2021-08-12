@@ -3,6 +3,9 @@ import fail from '../images/fail.png'
 
 
 function InfoTooltip(props) {
+
+  console.dir(props)
+
   return (
     <div className={`popup popup_type_auth ${props.isOpen ? "popup_opened" : ""}`}>
       <div className="popup__container popup__container_auth">

@@ -116,6 +116,7 @@ function App() {
       .then(res => {
         localStorage.setItem('token', res.token)
         setIsInfoTooltipPopupOpen(true)
+        setIsSuccessRegistration(true)
         history.push('/sign-in')
       })
       .catch(() => {
