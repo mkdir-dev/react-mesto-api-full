@@ -112,17 +112,3 @@ module.exports.dislikeCard = (req, res, next) => {
     })
     .catch(next);
 };
-
-/*
-    Card.findById(cardId)
-      .orFail(new Error('NotFound'))
-      .then((card) => {
-        if (card.owner.toString() !== userId) {
-          throw new ForbiddenError('Вы не можете удалять чужие карточки');
-        } else {
-          Card.findByIdAndRemove(cardId)
-            .then(() => res.status(SUCCESS_OK).send(card))
-            .catch(next);
-        }
-      })
-      */

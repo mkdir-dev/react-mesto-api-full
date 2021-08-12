@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+// пока убрать куки потом переписать
 // const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 

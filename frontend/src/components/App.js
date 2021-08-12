@@ -181,7 +181,6 @@ function App() {
     }
   }, [loggedIn])
 
-  // ???
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/')

@@ -32,9 +32,6 @@ export function authorization(email, password) {
 }
 
 export function getToken(token) {
-
-  console.log("getToken: " + token)
-
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
