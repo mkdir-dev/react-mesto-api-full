@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-// пока убрать куки потом переписать
-// const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
 const { login, createUser } = require('./controllers/users');
@@ -24,6 +22,7 @@ const { errors } = require('celebrate');
 
 const { requestCors } = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { handleErr } = require('./middlewares/handleErr');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -47,7 +46,7 @@ app.use(limiter);
 
 app.use('/', express.json());
 app.use(helmet());
-// app.use(cookieParser());
+
 app.use(requestLogger);
 
 app.post('/signin', signinValidation, login);
@@ -64,16 +63,6 @@ app.get('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-
-  res.status(statusCode).send({
-    message: statusCode === 500
-      ? 'На сервере произошла ошибка'
-      : message,
-  });
-
-  next();
-});
+app.use(handleErr);
 
 app.listen(PORT);
