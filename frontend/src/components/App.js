@@ -174,7 +174,7 @@ function App() {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
           setCurrentUser(userData.userInfo)
-          setCards(cardsData.data)
+          setCards(cardsData.data.reverse())
         })
         .catch(err => {
           console.log(`Данные с сервера не получены. Ошибка: ${err}.`)

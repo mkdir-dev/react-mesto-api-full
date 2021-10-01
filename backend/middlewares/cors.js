@@ -4,6 +4,7 @@ const allowedCors = [
   'https://api.mesto-mkdirdev.nomoredomains.club',
   'http://api.mesto-mkdirdev.nomoredomains.club',
   'localhost:3000',
+  'http://localhost:3000',
 ];
 
 module.exports.requestCors = (req, res, next) => {
